@@ -2,6 +2,7 @@
     <header>
         <h1>{{title}}</h1>
         <AddTaskButton
+            v-show="isHomePage"
             @toggle-add-task-form="$emit('toggle-add-task-form')" 
             :text="showTaskForm? 'close' : 'add task' " 
             :color="showTaskForm? 'red': 'green'" />
@@ -24,6 +25,14 @@ export default {
             default: 'Title'
         },
         showTaskForm: Boolean
+    },
+    computed:{
+        isHomePage(){
+            if(this.$route.path ==='/')
+                return true
+            else
+                return false
+        }
     }
 }
 </script>

@@ -5,80 +5,32 @@
           title="Task Tracker"
           :showTaskForm="showTaskForm" />
 
-        <div v-show="showTaskForm" >
-          <AddTaskForm @add-task="addTask" />
-        </div>
-        
-        <Tasks 
-            :tasks='tasks'
-            @toggle-reminder="toggleReminder"
-            @delete-task="deleteTask" />
+        <router-view :showTaskForm='showTaskForm'></router-view>  
+
+        <Footer />
     </div>
 </template>
 
 <script>
-// import components from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
-import Tasks from './components/Tasks.vue'
-import AddTaskForm from './components/AddTaskForm.vue'
-
-import {
-  getTasks,
-  getTask, 
-  createTask,
-  deleteTask,
-  updateTask
-} from './api.js'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
       Header,
-      AddTaskForm,
-      Tasks,
+      Footer,
   },  
   data(){
       return {
-          tasks: [],
-          showTaskForm: false
+        showTaskForm: false
       }
   },
   methods:{
-      async addTask(task){
-        this.tasks.push(
-          await createTask(task)
-        )
-      },
-
-      async deleteTask(id){
-          if(confirm('are you sure')){
-              (await deleteTask(id))? 
-                this.tasks = this.tasks.filter((task)=> task.id !== id)
-                :
-                alert('backend error')
-          }
-      },
-      toggleAddTaskForm(){
+    toggleAddTaskForm(){
         this.showTaskForm=!this.showTaskForm
       },
-      toggleReminder(id){
-
-        task = this.tasks.find((t)=> t.id === id )
-
-        // 
-
-        this.tasks = this.tasks.map(
-          (task) => task.id === id ? {...task, reminder: !data.reminder} : task
-        )
-      },
-
-      getTasks,
-      getTask,
-      createTask
   },
-  async created(){
-    this.tasks = await this.getTasks()
-  }
 }
 </script>
 

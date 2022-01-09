@@ -27,12 +27,12 @@ async function deleteTask(id){
 }
 
 async function updateTask(task){
-    const res = await fetch(`api/tasks/${id}`,{
+    const res = await fetch(`api/tasks/${task.id}`,{
         method: 'PUT',
         headers: {
             'Content-type': 'application/json'
         },
-        body: task
+        body: JSON.stringify(task),
     })
     return await res.json()
 }

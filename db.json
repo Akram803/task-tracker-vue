@@ -4,7 +4,13 @@
       "id": 1,
       "text": "covide vaccine",
       "day": "December 25th at 10:00am",
-      "reminder": true
+      "reminder": false
+    },
+    {
+      "text": "complete the app",
+      "day": "2022-01-09",
+      "reminder": true,
+      "id": 2
     }
   ]
 }
